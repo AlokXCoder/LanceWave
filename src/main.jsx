@@ -1,0 +1,142 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router";
+import MainLayout from './Layouts/MainLayout.jsx';
+import Home from './components/Home.jsx';
+import AddTask from './components/Pages/AddTask.jsx';
+import BrowseTasks from './components/Pages/BrowseTasks.jsx';
+import Error404 from './components/Error404.jsx';
+import Login from './components/Login/Login.jsx';
+import ContextProvider from './Provider/ContextProvider.jsx';
+import { ToastContainer } from 'react-toastify';
+import ResetPassword from './components/ResetPassword/ResetPassword.jsx';
+import TaskDetails from './components/Pages/TaskDetails.jsx';
+import MyPostedTasks from './components/Pages/MyPostedTask.jsx';
+import Register from './components/Register/Register.jsx';
+import About from './components/Pages/About.jsx';
+import Update from './components/Update.jsx';
+import BidsDetails from './components/BidsDetails.jsx';
+import PrivateRoute from './Route/PrivateRoute.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
+import FeaturedTask from './components/FeaturedTask.jsx';
+import FeaturedTaskDetails from './components/Pages/FeaturedTaskDetails.jsx';
+import MyProfile from './components/Pages/MyProfile.jsx';
+import LoadingSpinner from './components/LoadingSpinner.jsx';
+import PlaceBid from './components/Pages/PlaceBid.jsx';
+import MyBids from './components/Pages/MyBids.jsx';
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: MainLayout,
+    children: [
+      {
+        index: true,
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+        Component: Home
+      },
+      {
+        path: 'add-task',
+        element: <PrivateRoute>
+          <AddTask></AddTask>
+        </PrivateRoute>,
+      },
+      {
+        path: 'browse-tasks',
+        Component: BrowseTasks
+      },
+      {
+        path: 'featured-tasks',
+        element: <FeaturedTask></FeaturedTask>,
+      },
+      {
+        path: '/featured-tasks-details/:id',
+        element: <PrivateRoute>
+          <FeaturedTaskDetails></FeaturedTaskDetails>
+        </PrivateRoute>,
+      },
+      {
+        path: 'task-details/:id',
+        Component: TaskDetails
+      },
+      // task-details/2
+      {
+        path: 'my-posted-tasks',
+        element: <PrivateRoute>
+          <MyPostedTasks></MyPostedTasks>
+        </PrivateRoute>,
+      },
+      {
+        path: 'my-bids',
+        element: <PrivateRoute>
+          <MyBids></MyBids>
+        </PrivateRoute>,
+      },
+      {
+        path: 'login',
+        Component: Login
+      },
+      {
+        path: 'register',
+        Component: Register
+      },
+      {
+        path: 'reset-password',
+        Component: ResetPassword
+      },
+      {
+        path: 'my-profile',
+        Component: MyProfile
+      },
+      {
+        path: 'about',
+        element: <PrivateRoute>
+          <About></About>
+        </PrivateRoute>,
+      },
+      {
+        path: 'dashboard',
+        element: <PrivateRoute>
+          <Dashboard></Dashboard>
+        </PrivateRoute>,
+      },
+      {
+        path: '/tasks/:id',
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+        element: <PrivateRoute>
+          <BidsDetails></BidsDetails>
+        </PrivateRoute>,
+      },
+      {
+        path: 'update-task/:id',
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+        Component: Update
+      },
+      {
+        path: 'tasks/:id/bid',
+        element: <PrivateRoute>
+          <PlaceBid></PlaceBid>
+        </PrivateRoute>,
+      },
+      { path: '*', Component: Error404 },
+
+    ]
+  },
+]);
+
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
+    <ToastContainer></ToastContainer>
+  </StrictMode>,
+)
