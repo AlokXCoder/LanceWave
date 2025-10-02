@@ -71,8 +71,8 @@ Firebase initialization reads these from `import.meta.env` in `src/Firebase/Fire
 1) Clone and install
 
 ```bash
-git clone https://github.com/your-username/task-match.git
-cd task-match
+git clone https://github.com/AlokXCoder/LanceWave.git
+cd LanceWave
 npm install
 ```
 
