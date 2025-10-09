@@ -7,7 +7,7 @@ import { getStorage } from "firebase/storage";
 // Firebase config using Vite environment variables with safe fallbacks
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDnOeGovfqHiYqvGgaq_-TnJChhEFvzj18",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "lancewave-mark1.firebaseapp.com",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "lancewave.web.app",
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "lancewave-mark1",
   // Bucket name must be the appspot.com form, not firebasestorage.app
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "lancewave-mark1.appspot.com",
